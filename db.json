@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "id": "7662",
+      "name": "ssss",
+      "number": "444423444",
+      "email": "21989@yenepoya.edu.in",
+      "password": "@rashAd007"
+    },
+    {
+      "id": "16b4",
+      "name": "athif",
+      "number": "45784692",
+      "email": "Athif@gmail.com",
+      "password": "A@thif001"
+    },
+    {
+      "id": "ed66",
+      "name": "athif",
+      "number": "45784",
+      "email": "Athifs@gmail.com",
+      "password": "A@tag457sy",
+      "cart": []
+    }
+  ],
+  "products": [
+    {
+      "name": "mango",
+      "image": "/mango.jpg",
+      "id": "0a43"
+    }
+  ],
+  "carts": [
+    {
+      "id": "f831",
+      "userId": "16b4",
+      "items": []
+    }
+  ]
+}
