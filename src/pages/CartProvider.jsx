@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext();
 
@@ -7,13 +7,25 @@ export function CartProvider({ children }) {
   const [wishlist, setWishlist] = useState([]);
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+    if (savedUser) setUser(savedUser);
+  }, []);
+
   const initializeUserCart = (loggedInUser) => {
     setUser(loggedInUser);
+    localStorage.setItem("user", JSON.stringify(loggedInUser));
     setCart([]);
     setWishlist([]);
   };
 
-  // Add item or increase quantity
+  const logoutUser = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+    setCart([]);
+    setWishlist([]);
+  };
+
   const addToCart = (product, qty = 1) => {
     setCart((prev) => {
       const existing = prev.find((p) => p.id === product.id);
@@ -29,7 +41,6 @@ export function CartProvider({ children }) {
     });
   };
 
-  // Decrease quantity
   const decreaseQuantity = (productId) => {
     setCart((prev) =>
       prev
@@ -40,18 +51,16 @@ export function CartProvider({ children }) {
     );
   };
 
-  const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((p) => p.id !== id));
-  };
-
+  const removeFromCart = (id) => setCart((prev) => prev.filter((p) => p.id !== id));
   const clearCart = () => setCart([]);
-
   const addToWishlist = (product) => {
     setWishlist((prev) => {
-      const exists = prev.find((p) => p.id === product.id);
-      if (exists) return prev;
+      if (prev.some((p) => p.id === product.id)) return prev;
       return [...prev, product];
     });
+  };
+  const removeFromWishlist = (id) => {
+    setWishlist((prev) => prev.filter((p) => p.id !== id));
   };
 
   return (
@@ -59,13 +68,15 @@ export function CartProvider({ children }) {
       value={{
         user,
         cart,
+        wishlist,
         addToCart,
         decreaseQuantity,
         removeFromCart,
         clearCart,
-        wishlist,
         addToWishlist,
+        removeFromWishlist,
         initializeUserCart,
+        logoutUser,
       }}
     >
       {children}

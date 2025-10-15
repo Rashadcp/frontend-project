@@ -21,20 +21,216 @@
       "email": "Athifs@gmail.com",
       "password": "A@tag457sy",
       "cart": []
+    },
+    {
+      "id": "717e",
+      "name": "rashad",
+      "number": "45786652",
+      "email": "rash3ad@gmail.com",
+      "password": "@rashad33",
+      "cart": []
+    },
+    {
+      "id": "91e5",
+      "name": "Rashad cp",
+      "number": "9562703957",
+      "email": "rashadcp000@gmail.com",
+      "password": "@rasha007",
+      "cart": []
+    },
+    {
+      "id": "883f",
+      "name": "salman",
+      "number": "9048752145",
+      "email": "salma@gmail.com",
+      "password": "123456@",
+      "cart": []
     }
   ],
   "products": [
     {
-      "name": "mango",
-      "image": "/mango.jpg",
-      "id": "0a43"
+      "id": "1",
+      "name": "Energy Drink - Lemon",
+      "price": 130,
+      "image": "lemon.png"
+    },
+    {
+      "id": "2",
+      "name": "Energy Drink - Apple",
+      "price": 150,
+      "image": "apple.png"
+    },
+    {
+      "id": "3",
+      "name": "Energy Drink - Mango",
+      "price": 150,
+      "image": "mango.png"
+    },
+    {
+      "id": "4",
+      "name": "Energy Drink - Chocolate",
+      "price": 170,
+      "image": "chocolate.png"
+    },
+    {
+      "id": "5",
+      "name": "Energy Drink - Coconut",
+      "price": 160,
+      "image": "coconut.png"
+    },
+    {
+      "id": "6",
+      "name": "Energy Drink - Green Apple",
+      "price": 170,
+      "image": "greenapple.png"
+    },
+    {
+      "id": "7",
+      "name": "Energy Drink - Lemon Lime",
+      "price": 140,
+      "image": "lemonlime.png"
+    },
+    {
+      "id": "8",
+      "name": "Energy Drink - Lyche",
+      "price": 150,
+      "image": "lichi.png"
+    },
+    {
+      "id": "9",
+      " name": "Energy Drink - Mint",
+      "price": 110,
+      "image": "mint.png"
+    },
+    {
+      "id": "10",
+      " name": "Energy Drink - Eligote",
+      "price": 250,
+      "image": "eligote.jpg"
+    },
+    {
+      "id": "11",
+      " name": "Energy Drink - Refuel Legend",
+      "price": 340,
+      "image": "refuellegend.jpg"
+    },
+    {
+      "id": "12",
+      " name": "Energy Drink - Special Dynamite",
+      "price": 390,
+      "image": "specialdynamite.jpg"
+    },
+    {
+      "id": "13",
+      " name": "Energy Drink - Special Dynamite",
+      "price": 510,
+      "image": "specialdynamite.jpg"
+    },
+    {
+      "id": "14",
+      "name": "Energy Drink - Ginger Elanchi",
+      " price": 160,
+      " image": "gingerelanchi.png"
     }
   ],
-  "carts": [
+
+  
+  "orders": [
     {
-      "id": "f831",
-      "userId": "16b4",
-      "items": []
+      "id": "b0fb",
+      "user": "rash3ad@gmail.com",
+      "items": [
+        {
+          "id": "3",
+          "name": "Energy Drink - Mango",
+          "price": 150,
+          "image": "mango.png",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 150,
+      "paymentMethod": "Cash on Delivery",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "15/10/2025, 12:23:54 pm",
+      "status": "Paid"
+    },
+    {
+      "id": "c7b7",
+      "user": "rash3ad@gmail.com",
+      "items": [
+        {
+          "id": "2",
+          "name": "Energy Drink - Apple",
+          "price": 150,
+          "image": "apple.png",
+          "quantity": 9
+        },
+        {
+          "id": "4",
+          "name": "Energy Drink - Chocolate",
+          "price": 170,
+          "image": "chocolate.png",
+          "quantity": 4
+        },
+        {
+          "id": "1",
+          "name": "Energy Drink - Lemon",
+          "price": 130,
+          "image": "lemon.png",
+          "quantity": 3
+        },
+        {
+          "id": "8",
+          "name": "Energy Drink - Lyche",
+          "price": 150,
+          "image": "lichi.png",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 2570,
+      "paymentMethod": "Online Payment",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "dfgh@rtuu",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "15/10/2025, 12:58:47 pm",
+      "status": "Paid"
+    },
+    {
+      "id": "da31",
+      "user": "rash3ad@gmail.com",
+      "items": [
+        {
+          "id": "3",
+          "name": "Energy Drink - Mango",
+          "price": 150,
+          "image": "mango.png",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 150,
+      "paymentMethod": "Cash on Delivery",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "15/10/2025, 1:56:12 pm",
+      "status": "Paid"
     }
   ]
 }
