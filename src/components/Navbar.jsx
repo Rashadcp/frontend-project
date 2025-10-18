@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaHeart, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
+import { FaShoppingCart, FaBars, FaTimes, FaHeart } from "react-icons/fa";
 import { CartContext } from "../pages/CartProvider";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { cart, wishlist, user, logoutUser } = useContext(CartContext);
+  const { cart, wishlist, user, logoutUser, searchTerm, setSearchTerm } = useContext(CartContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -13,28 +13,48 @@ function Navbar() {
     navigate("/");
   };
 
-  const cartCount = cart.length
+  const cartCount = cart.length;
   const wishlistCount = wishlist.length;
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 border-b border-white/10">
-      {/* Glass container */}
       <div className="bg-white/10 backdrop-blur-xl shadow-lg shadow-black/10 border border-white/20 rounded-b-3xl transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
               <span className="text-2xl font-bold bg-gradient-to-r from-[#b2f562] to-[#88ffcc] text-transparent bg-clip-text tracking-wide drop-shadow-md">
                 REFUEL
               </span>
             </Link>
 
-            {/* Desktop Menu */}
+            {/* Search Bar */}
+            <div className="hidden md:block flex-1 mx-6">
+              <input
+                type="text"
+                placeholder="Search for energy drinks..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full px-4 py-2 rounded-full bg-white/20 text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-[#b2f562]"
+              />
+            </div>
+
+            {/* Desktop Links */}
             <div className="hidden md:flex items-center space-x-8 text-white/90 font-medium">
               <Link to="/" className="hover:text-[#b2f562] transition">Home</Link>
               <Link to="/products" className="hover:text-[#b2f562] transition">Products</Link>
+              <Link to="/orders" className="hover:text-[#b2f562] transition">Orders</Link>
 
-              {/* Cart */}
+              {/* ❤️ Wishlist */}
+              <Link to="/wishlist" className="relative hover:text-[#b2f562] transition">
+                <FaHeart size={20} />
+                {wishlistCount > 0 && (
+                  <span className="absolute -top-2 -right-3 bg-pink-400 text-black text-xs px-1.5 py-0.5 rounded-full font-semibold">
+                    {wishlistCount}
+                  </span>
+                )}
+              </Link>
+
+              {/* 🛒 Cart */}
               <Link to="/cart" className="relative hover:text-[#b2f562] transition">
                 <FaShoppingCart size={20} />
                 {cartCount > 0 && (
@@ -43,11 +63,8 @@ function Navbar() {
                   </span>
                 )}
               </Link>
-<Link to="/orders" className="hover:text-[#c0daac] font-medium text-white">
-  Orders
-</Link>
 
-              {/* User / Login */}
+              {/* 👤 Login / Logout */}
               {user ? (
                 <div className="flex items-center gap-4">
                   <span className="font-medium text-[#b2f562]">Hi, {user.name}</span>
@@ -76,39 +93,6 @@ function Navbar() {
             </div>
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden bg-white/10 backdrop-blur-xl border-t border-white/10 py-4 space-y-3 px-6 text-white/90">
-            <Link to="/" onClick={() => setIsOpen(false)} className="block hover:text-[#b2f562]">Home</Link>
-            <Link to="/products" onClick={() => setIsOpen(false)} className="block hover:text-[#b2f562]">Products</Link>
-            <Link to="/wishlist" onClick={() => setIsOpen(false)} className="block hover:text-[#b2f562]">Wishlist</Link>
-            <Link to="/cart" onClick={() => setIsOpen(false)} className="block hover:text-[#b2f562]">Cart</Link>
-
-            {user ? (
-              <>
-                <p className="text-[#b2f562]">Hi, {user.name}</p>
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    setIsOpen(false);
-                  }}
-                  className="w-full px-3 py-2 bg-[#b2f562] text-black rounded-full hover:bg-white transition"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <Link
-                to="/login"
-                onClick={() => setIsOpen(false)}
-                className="block text-center w-full px-3 py-2 bg-[#b2f562] text-black rounded-full hover:bg-white transition"
-              >
-                Login
-              </Link>
-            )}
-          </div>
-        )}
       </div>
     </nav>
   );

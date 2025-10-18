@@ -1,24 +1,24 @@
 import { useContext } from "react";
 import { CartContext } from "../pages/CartProvider";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 function Cart() {
   const { cart, addToCart, decreaseQuantity, removeFromCart } = useContext(CartContext);
   const navigate = useNavigate();
 
   const totalAmount = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-  // 🔒 Check login before proceeding to payment
+  // login check
   const handleProceedToPayment = () => {
   const loggedUser = localStorage.getItem("user");
   if (!loggedUser) {
-    alert("Please login to proceed with payment.");
+    toast.info("Login required to buy");
     navigate("/login");
     return;
   }
-  navigate("/address", { state: { totalAmount } }); // ✅ changed route
+  navigate("/address", { state: { totalAmount } }); 
 };
-  // If cart is empty
+  // cart empty
 
   if (cart.length === 0) {
     return (

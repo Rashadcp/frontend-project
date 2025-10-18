@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import axios from "axios";
 
 export const CartContext = createContext();
 
@@ -7,16 +8,47 @@ export function CartProvider({ children }) {
   const [wishlist, setWishlist] = useState([]);
   const [user, setUser] = useState(null);
 
+  // Load user from localStorage on app start
   useEffect(() => {
     const savedUser = JSON.parse(localStorage.getItem("user"));
-    if (savedUser) setUser(savedUser);
+    if (savedUser) {
+      setUser(savedUser);
+      fetchUserCart(savedUser.email);
+    }
   }, []);
 
+  // Fetch cart from db.json based on logged-in user
+  const fetchUserCart = async (email) => {
+    try {
+      const res = await axios.get(`http://localhost:5000/users?email=${email}`);
+      if (res.data.length > 0 && res.data[0].cart) {
+        setCart(res.data[0].cart);
+      }
+    } catch (err) {
+      console.error("Error fetching user cart:", err);
+    }
+  };
+
+  // Save updated cart in db.json
+  const saveUserCart = async (email, updatedCart) => {
+    try {
+      const res = await axios.get(`http://localhost:5000/users?email=${email}`);
+      if (res.data.length > 0) {
+        const userId = res.data[0].id;
+        await axios.patch(`http://localhost:5000/users/${userId}`, {
+          cart: updatedCart,
+        });
+      }
+    } catch (err) {
+      console.error("Error saving cart:", err);
+    }
+  };
+
+  // When a new user logs in
   const initializeUserCart = (loggedInUser) => {
     setUser(loggedInUser);
     localStorage.setItem("user", JSON.stringify(loggedInUser));
-    setCart([]);
-    setWishlist([]);
+    fetchUserCart(loggedInUser.email);
   };
 
   const logoutUser = () => {
@@ -26,43 +58,69 @@ export function CartProvider({ children }) {
     setWishlist([]);
   };
 
+  // --- CART OPERATIONS ---
   const addToCart = (product, qty = 1) => {
     setCart((prev) => {
       const existing = prev.find((p) => p.id === product.id);
+      let updated;
       if (existing) {
-        return prev.map((p) =>
-          p.id === product.id
-            ? { ...p, quantity: (p.quantity || 1) + qty }
-            : p
+        updated = prev.map((p) =>
+          p.id === product.id ? { ...p, quantity: (p.quantity || 1) + qty } : p
         );
       } else {
-        return [...prev, { ...product, quantity: qty }];
+        updated = [...prev, { ...product, quantity: qty }];
       }
+
+      if (user) saveUserCart(user.email, updated);
+      return updated;
     });
   };
 
   const decreaseQuantity = (productId) => {
-    setCart((prev) =>
-      prev
+    setCart((prev) => {
+      const updated = prev
         .map((p) =>
           p.id === productId ? { ...p, quantity: (p.quantity || 1) - 1 } : p
         )
-        .filter((p) => p.quantity > 0)
-    );
-  };
-
-  const removeFromCart = (id) => setCart((prev) => prev.filter((p) => p.id !== id));
-  const clearCart = () => setCart([]);
-  const addToWishlist = (product) => {
-    setWishlist((prev) => {
-      if (prev.some((p) => p.id === product.id)) return prev;
-      return [...prev, product];
+        .filter((p) => p.quantity > 0);
+      if (user) saveUserCart(user.email, updated);
+      return updated;
     });
   };
-  const removeFromWishlist = (id) => {
-    setWishlist((prev) => prev.filter((p) => p.id !== id));
+
+  const removeFromCart = (id) => {
+    setCart((prev) => {
+      const updated = prev.filter((p) => p.id !== id);
+      if (user) saveUserCart(user.email, updated);
+      return updated;
+    });
   };
 
+  const clearCart = () => {
+    setCart([]);
+    if (user) saveUserCart(user.email, []);
+  };
+
+  const addToWishlist = (product) => {
+  setWishlist((prev) => {
+    if (prev.some((p) => p.id === product.id)) return prev;
+    return [...prev, product];
+  });
+};
+
+const removeFromWishlist = (id) => {
+  setWishlist((prev) => prev.filter((p) => p.id !== id));
+};
+
+const toggleWishlist = (product) => {
+  setWishlist((prev) =>
+    prev.some((p) => p.id === product.id)
+      ? prev.filter((p) => p.id !== product.id)
+      : [...prev, product]
+  );
+};
+
+const [searchTerm, setSearchTerm] = useState("");
   return (
     <CartContext.Provider
       value={{
@@ -77,6 +135,9 @@ export function CartProvider({ children }) {
         removeFromWishlist,
         initializeUserCart,
         logoutUser,
+        searchTerm,
+        toggleWishlist,
+    setSearchTerm,
       }}
     >
       {children}

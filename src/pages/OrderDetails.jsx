@@ -1,40 +1,42 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { CartContext } from "./CartProvider";
-import { Link } from "react-router-dom";
-
 
 function OrderDetails() {
-  const { user } = useContext(CartContext);
+  const { user: contextUser } = useContext(CartContext);
+  const [user, setUser] = useState(contextUser || null);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-
+  useEffect(() => {
+    
+    if (!contextUser) {
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      if (storedUser) setUser(storedUser);
+    }
+  }, [contextUser]);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user?.email) return;
 
+    setLoading(true);
     axios
-      .get(`http://localhost:5000/orders?userEmail=${user.email}`)
+      .get(`http://localhost:5000/orders?user=${user.email}`)
       .then((res) => {
-        setOrders(res.data.reverse()); 
+        setOrders(res.data.reverse());
         setLoading(false);
       })
       .catch(() => {
-        setError("Failed to load orders");
+        setError("❌ Failed to load orders");
         setLoading(false);
       });
   }, [user]);
 
   if (!user)
     return (
-  <div>
       <div className="min-h-screen bg-black text-white flex justify-center items-center text-xl">
-        ⚠️ Please login to view your orders 
-        <Link path={"/login"} > login</Link>
-      </div>
-      
+        ⚠️ Please login to view your orders
       </div>
     );
 
@@ -87,9 +89,6 @@ function OrderDetails() {
                     Status: {order.status}
                   </p>
                 </div>
-                <p className="text-lg font-semibold text-[#8dc53e] self-center">
-                  Total: ₹{order.total}
-                </p>
               </div>
 
               <div className="mt-4 border-t border-gray-700 pt-4 grid gap-4">

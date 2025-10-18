@@ -22,7 +22,7 @@ function Address() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // ✅ simple validation
+    
     if (
       !form.name ||
       !form.phone ||
@@ -35,7 +35,7 @@ function Address() {
       return;
     }
 
-    // send user to payment page with address & total
+    
     navigate("/payment", { state: { ...form, totalAmount } });
   };
 

@@ -48,7 +48,7 @@ function Payment() {
       alert(`✅ Payment of ₹${totalAmount.toFixed(2)} successful!`);
 
       clearCart();
-      navigate("/orders"); // Redirect to order details page
+      navigate("/orders"); 
     } catch (error) {
       console.error("❌ Error saving order:", error);
       alert("Failed to save order details!");

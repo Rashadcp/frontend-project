@@ -7,7 +7,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // 👁️ control
+  const [showPassword, setShowPassword] = useState(false); 
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ function Login() {
         initializeUserCart(user);
         navigate("/products");
       } else {
-        setErrorMessage("User not found. Please register first!");
+        toast.error("User not found please Register!");
       }
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -77,7 +77,7 @@ function Login() {
             </button>
           </div>
 
-          {/* Error Message */}
+          
           {errorMessage && (
             <p className="text-red-600 text-sm text-center">{errorMessage}</p>
           )}
@@ -86,6 +86,7 @@ function Login() {
           <button
             type="submit"
             className="bg-[#8dc53e] text-white py-2 rounded hover:bg-[#76b431] transition"
+            onClick={()=>toast.success("Successfully Logged in")}
           >
             Login
           </button>

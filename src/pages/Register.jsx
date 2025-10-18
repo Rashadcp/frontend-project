@@ -33,7 +33,7 @@ function Register() {
         number,
         email,
         password,
-        cart: [], // 🛒 assign empty cart here
+        cart: [], 
       });
 
       alert("Registered successfully! Your cart is ready.");
@@ -78,7 +78,7 @@ function Register() {
             required
           />
 
-          {/* Password with Eye Toggle */}
+          {/* Password  */}
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}

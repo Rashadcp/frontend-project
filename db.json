@@ -45,6 +45,30 @@
       "email": "salma@gmail.com",
       "password": "123456@",
       "cart": []
+    },
+    {
+      "id": "4075",
+      "name": "Rashad",
+      "number": "9562703957",
+      "email": "rashadcp000@gmail.com",
+      "password": "@rasha007",
+      "cart": []
+    },
+    {
+      "id": "c757",
+      "name": "jumana p",
+      "number": "12345678909",
+      "email": "jumana.edv@gmail.com",
+      "password": "jumana@123",
+      "cart": []
+    },
+    {
+      "id": "ed49",
+      "name": "rashad",
+      "number": "12344556",
+      "email": "rashad22@gmail.com",
+      "password": "@Rasha007",
+      "cart": []
     }
   ],
   "products": [
@@ -133,8 +157,6 @@
       " image": "gingerelanchi.png"
     }
   ],
-
-  
   "orders": [
     {
       "id": "b0fb",
@@ -230,6 +252,134 @@
         "emiOption": ""
       },
       "date": "15/10/2025, 1:56:12 pm",
+      "status": "Paid"
+    },
+    {
+      "id": "a06d",
+      "user": "jumana.edv@gmail.com",
+      "items": [
+        {
+          "id": "2",
+          "name": "Energy Drink - Apple",
+          "price": 150,
+          "image": "apple.png",
+          "quantity": 1
+        },
+        {
+          "id": "3",
+          "name": "Energy Drink - Mango",
+          "price": 150,
+          "image": "mango.png",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 300,
+      "paymentMethod": "EMI",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "16/10/2025, 2:25:43 pm",
+      "status": "Paid"
+    },
+    {
+      "id": "9a29",
+      "user": "rashadcp000@gmail.com",
+      "items": [
+        {
+          "id": "2",
+          "name": "Energy Drink - Apple",
+          "price": 150,
+          "image": "apple.png",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 150,
+      "paymentMethod": "Cash on Delivery",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "16/10/2025, 2:47:16 pm",
+      "status": "Paid"
+    },
+    {
+      "id": "6765",
+      "user": "rashad22@gmail.com",
+      "items": [
+        {
+          "id": "2",
+          "name": "Energy Drink - Apple",
+          "price": 150,
+          "image": "apple.png",
+          "quantity": 1
+        },
+        {
+          "id": "3",
+          "name": "Energy Drink - Mango",
+          "price": 150,
+          "image": "mango.png",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 300,
+      "paymentMethod": "Cash on Delivery",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "16/10/2025, 6:13:47 pm",
+      "status": "Paid"
+    },
+    {
+      "id": "a3e7",
+      "user": "rashad22@gmail.com",
+      "items": [
+        {
+          "id": "2",
+          "name": "Energy Drink - Apple",
+          "price": 150,
+          "image": "apple.png",
+          "quantity": 1
+        },
+        {
+          "id": "1",
+          "name": "Energy Drink - Lemon",
+          "price": 130,
+          "image": "lemon.png",
+          "quantity": 1
+        },
+        {
+          "id": "3",
+          "name": "Energy Drink - Mango",
+          "price": 150,
+          "image": "mango.png",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 430,
+      "paymentMethod": "Online Payment",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "dcv",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "16/10/2025, 8:49:41 pm",
       "status": "Paid"
     }
   ]
