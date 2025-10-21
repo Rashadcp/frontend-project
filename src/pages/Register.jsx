@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 function Register() {
   const [name, setName] = useState("");
@@ -16,17 +17,36 @@ function Register() {
 
     // Password validation  
     if (password.length < 6) {
-      alert("Password must be at least 6 characters");
+      toast.error("Password must be at least 6 characters", {
+        position: "top-right",
+        autoClose: 3000,
+      });
       return;
     }
 
     const passwordPattern = /[!@#\$%\^&\*]/;
     if (!passwordPattern.test(password)) {
-      alert("Password must include at least one special character (!, @, #, $, %, ^, &, *)");
+      toast.error("Password must include at least one special character (!, @, #, $, %, ^, &, *)", {
+        position: "top-right",
+        autoClose: 3000,
+      });
       return;
     }
 
     try {
+      // Check if email already exists
+      const response = await axios.get("http://localhost:5000/users");
+      const users = response.data;
+      const userExists = users.some(user => user.email === email);
+      
+      if (userExists) {
+        toast.error("Email already registered. Please login instead.", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        return;
+      }
+
       // Create user with empty cart
       await axios.post("http://localhost:5000/users", {
         name,
@@ -36,11 +56,24 @@ function Register() {
         cart: [], 
       });
 
-      alert("Registered successfully! Your cart is ready.");
-      navigate("/login");
+      toast.success("Registration successful! Please login.", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (error) {
       console.error("Registration failed:", error);
-      alert("Something went wrong during registration.");
+      toast.error("Registration failed. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
     }
   };
 

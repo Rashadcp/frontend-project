@@ -17,6 +17,16 @@ export function CartProvider({ children }) {
     }
   }, []);
 
+  // Check if user is logged in
+  const isLoggedIn = () => {
+    return !!user;
+  };
+
+  // Check if user is admin
+  const isAdmin = () => {
+    return localStorage.getItem('isAdmin') === 'true';
+  };
+
   // Fetch cart from db.json based on logged-in user
   const fetchUserCart = async (email) => {
     try {

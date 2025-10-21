@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CartContext } from "./CartProvider";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -17,6 +18,28 @@ function Login() {
     e.preventDefault();
     setErrorMessage("");
 
+    // Check for admin credentials first
+    if (email === "admin@refuel.com" && password === "admin123") {
+      try {
+        localStorage.setItem('isAdmin', 'true');
+        toast.success("Welcome Admin!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        setTimeout(() => {
+          navigate("/admin");
+        }, 1000);
+        return;
+      } catch (error) {
+        toast.error("Admin login failed. Please try again.");
+        return;
+      }
+    }
+
     try {
       const response = await axios.get("http://localhost:5000/users");
       const users = response.data;
@@ -27,13 +50,29 @@ function Login() {
 
       if (user) {
         initializeUserCart(user);
-        navigate("/products");
+        toast.success("Login successful!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        setTimeout(() => {
+          navigate("/products");
+        }, 1000);
       } else {
-        toast.error("User not found please Register!");
+        toast.error("Invalid credentials. Please try again or Register!", {
+          position: "top-right",
+          autoClose: 3000,
+        });
       }
     } catch (error) {
       console.error("Error fetching users:", error);
-      setErrorMessage("Something went wrong. Try again later.");
+      toast.error("Something went wrong. Please try again later.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
     }
   };
 

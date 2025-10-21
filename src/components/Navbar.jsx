@@ -28,7 +28,7 @@ function Navbar() {
             </Link>
 
             {/* Search Bar */}
-            <div className="hidden md:block flex-1 mx-6">
+            {/* <div className="hidden md:block flex-1 mx-6">
               <input
                 type="text"
                 placeholder="Search for energy drinks..."
@@ -36,7 +36,7 @@ function Navbar() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full px-4 py-2 rounded-full bg-white/20 text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-[#b2f562]"
               />
-            </div>
+            </div> */}
 
             {/* Desktop Links */}
             <div className="hidden md:flex items-center space-x-8 text-white/90 font-medium">

@@ -52,7 +52,8 @@
       "number": "9562703957",
       "email": "rashadcp000@gmail.com",
       "password": "@rasha007",
-      "cart": []
+      "cart": [],
+      "blocked": false
     },
     {
       "id": "c757",
@@ -68,14 +69,15 @@
       "number": "12344556",
       "email": "rashad22@gmail.com",
       "password": "@Rasha007",
-      "cart": []
+      "cart": [],
+      "blocked": false
     }
   ],
   "products": [
     {
       "id": "1",
       "name": "Energy Drink - Lemon",
-      "price": 130,
+      "price": 140,
       "image": "lemon.png"
     },
     {
@@ -124,37 +126,47 @@
       "id": "9",
       " name": "Energy Drink - Mint",
       "price": 110,
-      "image": "mint.png"
+      "image": "mint.png",
+      "name": "Energy Drink - Mint"
     },
     {
       "id": "10",
       " name": "Energy Drink - Eligote",
-      "price": 250,
-      "image": "eligote.jpg"
+      "price": 450,
+      "image": "eligote.jpg",
+      "name": "Energy Drink - Special Edition"
     },
     {
       "id": "11",
       " name": "Energy Drink - Refuel Legend",
       "price": 340,
-      "image": "refuellegend.jpg"
-    },
-    {
-      "id": "12",
-      " name": "Energy Drink - Special Dynamite",
-      "price": 390,
-      "image": "specialdynamite.jpg"
+      "image": "refuellegend.jpg",
+      "name": "Energy Drink - Recharge"
     },
     {
       "id": "13",
       " name": "Energy Drink - Special Dynamite",
       "price": 510,
-      "image": "specialdynamite.jpg"
+      "image": "specialdynamite.jpg",
+      "name": "energy drink"
     },
     {
-      "id": "14",
-      "name": "Energy Drink - Ginger Elanchi",
-      " price": 160,
-      " image": "gingerelanchi.png"
+      "id": "f8af",
+      "name": "Energy drink boost",
+      "price": 200,
+      "image": "https://th.bing.com/th/id/OIP.rfBFRmITXMn_XKSgYfbHYgAAAA?w=172&h=180&c=7&r=0&o=7&cb=12&dpr=1.3&pid=1.7&rm=3"
+    },
+    {
+      "id": "e7c6",
+      "name": "Energy drink Splash",
+      "price": 400,
+      "image": "http://localhost:5173/specialdynamite.jpg"
+    },
+    {
+      "id": "c184",
+      "name": "Energy Drink charged",
+      "price": 300,
+      "image": "http://localhost:5173/refuellegend.jpg"
     }
   ],
   "orders": [
@@ -284,7 +296,7 @@
         "emiOption": ""
       },
       "date": "16/10/2025, 2:25:43 pm",
-      "status": "Paid"
+      "status": "Cancelled"
     },
     {
       "id": "9a29",
@@ -309,7 +321,7 @@
         "emiOption": ""
       },
       "date": "16/10/2025, 2:47:16 pm",
-      "status": "Paid"
+      "status": "Delivered"
     },
     {
       "id": "6765",
@@ -341,7 +353,7 @@
         "emiOption": ""
       },
       "date": "16/10/2025, 6:13:47 pm",
-      "status": "Paid"
+      "status": "Delivered"
     },
     {
       "id": "a3e7",
@@ -380,6 +392,63 @@
         "emiOption": ""
       },
       "date": "16/10/2025, 8:49:41 pm",
+      "status": "Delivered"
+    },
+    {
+      "id": "444a",
+      "user": "rashadcp000@gmail.com",
+      "items": [
+        {
+          "id": "2",
+          "name": "Energy Drink - Apple",
+          "price": 150,
+          "image": "apple.png",
+          "quantity": 3
+        },
+        {
+          "id": "3",
+          "name": "Energy Drink - Mango",
+          "price": 150,
+          "image": "mango.png",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 600,
+      "paymentMethod": "Online Payment",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "9562703957@superyes",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "18/10/2025, 1:56:10 pm",
+      "status": "Delivered"
+    },
+    {
+      "id": "ac06",
+      "user": "rashadcp000@gmail.com",
+      "items": [
+        {
+          "id": "1",
+          "name": "Energy Drink - Lemon",
+          "price": 140,
+          "image": "lemon.png",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 140,
+      "paymentMethod": "Internet Banking",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "20/10/2025, 11:57:37 am",
       "status": "Paid"
     }
   ]

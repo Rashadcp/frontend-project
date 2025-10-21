@@ -2,20 +2,21 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { CartContext } from "./CartProvider";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
+import Footer from "../components/Footer";
 
 function Products() {
-  const { addToCart, searchTerm, toggleWishlist, wishlist } =
-    useContext(CartContext);
+  const { addToCart, toggleWishlist, wishlist } = useContext(CartContext);
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 10;
+  const productsPerPage = 12;
 
   const [sortOption, setSortOption] = useState("");
   const [filterCategory, setFilterCategory] = useState("All");
   const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [searchTerm, setSearchTerm] = useState(""); 
 
   // Fetch products once
   useEffect(() => {
@@ -37,7 +38,7 @@ function Products() {
       (filterCategory === "All" || p.category === filterCategory) &&
       p.price >= priceRange[0] &&
       p.price <= priceRange[1] &&
-      (p.name?.toLowerCase().includes(searchTerm?.toLowerCase() || "") || false)
+      (p.name?.toLowerCase().includes(searchTerm.toLowerCase()) || false)
   );
 
   // Sorting logic
@@ -69,12 +70,23 @@ function Products() {
     if (currentPage > totalPages) setCurrentPage(totalPages || 1);
   }, [totalPages]);
 
-  // ✅ Always run all hooks above; handle loading/error below.
   return (
+    <>
     <div className="min-h-screen bg-black py-20">
-      <h1 className="text-4xl text-center text-[#00b2fe] font-extrabold mb-12">
+      <h1 className="text-4xl text-center text-[#00b2fe] font-extrabold mb-8">
         REFUEL Energy Drinks ⚡
       </h1>
+
+      {/* 🔍 Search Bar */}
+      <div className="max-w-2xl mx-auto mb-8 px-4">
+        <input
+          type="text"
+          placeholder="Search for energy drinks..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full px-4 py-3 rounded-full bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00b2fe]"
+        />
+      </div>
 
       {/* 🧠 Loading or Error */}
       {loading ? (
@@ -85,6 +97,7 @@ function Products() {
         <div className="text-red-500 text-center text-2xl mt-10">{error}</div>
       ) : (
         <>
+        
           {/* Sort & Filter */}
           <div className="max-w-7xl mx-auto px-4 mb-8 flex flex-wrap items-center justify-between gap-4 text-white">
             <div className="flex items-center gap-3">
@@ -102,19 +115,7 @@ function Products() {
               </select>
             </div>
 
-            <div className="flex items-center gap-3">
-              <label>Category:</label>
-              <select
-                value={filterCategory}
-                onChange={(e) => setFilterCategory(e.target.value)}
-                className="bg-gray-800 text-white rounded px-3 py-2"
-              >
-                <option value="All">All</option>
-                <option value="Lemon">Lemon</option>
-                <option value="Apple">Apple</option>
-                <option value="Mango">Mango</option>
-              </select>
-            </div>
+            
           </div>
 
           {/* Product Grid */}
@@ -152,9 +153,7 @@ function Products() {
 
                   <div className="flex gap-2 mt-auto">
                     <button
-                      onClick={() => addToCart(product)
-                      
-                      }
+                      onClick={() => addToCart(product)}
                       className="flex-1 bg-[#8dc53e] text-white py-2 rounded-lg hover:bg-[#76b431] transition flex items-center justify-center gap-2"
                     >
                       <FaShoppingCart /> Add
@@ -224,6 +223,8 @@ function Products() {
         </>
       )}
     </div>
+    <Footer />
+    </>
   );
 }
 
