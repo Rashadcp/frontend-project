@@ -1,18 +1,12 @@
 {
   "users": [
     {
-      "id": "7662",
-      "name": "ssss",
-      "number": "444423444",
-      "email": "21989@yenepoya.edu.in",
-      "password": "@rashAd007"
-    },
-    {
       "id": "16b4",
       "name": "athif",
       "number": "45784692",
       "email": "Athif@gmail.com",
-      "password": "A@thif001"
+      "password": "A@thif001",
+      "blocked": false
     },
     {
       "id": "ed66",
@@ -71,6 +65,39 @@
       "password": "@Rasha007",
       "cart": [],
       "blocked": false
+    },
+    {
+      "id": "830d",
+      "name": "nibil",
+      "number": "4578521963",
+      "email": "nibil@gmail.com",
+      "password": "@nibil123456",
+      "cart": []
+    },
+    {
+      "id": "40d3",
+      "name": "muhammed shemin",
+      "number": "9072999456",
+      "email": "shemin@gmail.com",
+      "password": "shemin@123",
+      "cart": []
+    },
+    {
+      "id": "8aa7",
+      "name": "test",
+      "number": "9562703957",
+      "email": "test@gmail.com",
+      "password": "@test123",
+      "cart": []
+    },
+    {
+      "id": "764c",
+      "name": "test1",
+      "number": "9562703957",
+      "email": "test1@gmail.com",
+      "password": "@test123",
+      "cart": [],
+      "blocked": false
     }
   ],
   "products": [
@@ -78,13 +105,15 @@
       "id": "1",
       "name": "Energy Drink - Lemon",
       "price": 140,
-      "image": "lemon.png"
+      "image": "lemon.png",
+      "category": "Orange"
     },
     {
       "id": "2",
       "name": "Energy Drink - Apple",
       "price": 150,
-      "image": "apple.png"
+      "image": "apple.png",
+      "category": "Apple"
     },
     {
       "id": "3",
@@ -148,7 +177,8 @@
       " name": "Energy Drink - Special Dynamite",
       "price": 510,
       "image": "specialdynamite.jpg",
-      "name": "energy drink"
+      "name": "energy drink",
+      "category": "Apple"
     },
     {
       "id": "f8af",
@@ -157,16 +187,22 @@
       "image": "https://th.bing.com/th/id/OIP.rfBFRmITXMn_XKSgYfbHYgAAAA?w=172&h=180&c=7&r=0&o=7&cb=12&dpr=1.3&pid=1.7&rm=3"
     },
     {
-      "id": "e7c6",
-      "name": "Energy drink Splash",
-      "price": 400,
-      "image": "http://localhost:5173/specialdynamite.jpg"
+      "id": "447f",
+      "name": "energy drink -jum",
+      "price": 900,
+      "image": "https://th.bing.com/th/id/OIP.nykKFuOmlGJ0EzW8SjaOTQHaHa?w=166&h=180&c=7&r=0&o=7&cb=12&dpr=1.3&pid=1.7&rm=3"
     },
     {
-      "id": "c184",
-      "name": "Energy Drink charged",
-      "price": 300,
-      "image": "http://localhost:5173/refuellegend.jpg"
+      "id": "c514",
+      "name": "Refuel - energy powder",
+      "price": 599,
+      "image": "https://i.pinimg.com/originals/89/bb/5e/89bb5ea14ee97ffc5be49c562dc89959.jpg"
+    },
+    {
+      "id": "b94b",
+      "name": "energy drink refuel thunder",
+      "price": 600,
+      "image": "https://th.bing.com/th/id/OIP.cHfxnvDcwmmwGCLvp_cQhAHaHa?w=188&h=188&c=7&r=0&o=7&cb=12&dpr=1.3&pid=1.7&rm=3"
     }
   ],
   "orders": [
@@ -193,7 +229,7 @@
         "emiOption": ""
       },
       "date": "15/10/2025, 12:23:54 pm",
-      "status": "Paid"
+      "status": "Delivered"
     },
     {
       "id": "c7b7",
@@ -239,7 +275,7 @@
         "emiOption": ""
       },
       "date": "15/10/2025, 12:58:47 pm",
-      "status": "Paid"
+      "status": "Delivered"
     },
     {
       "id": "da31",
@@ -264,7 +300,7 @@
         "emiOption": ""
       },
       "date": "15/10/2025, 1:56:12 pm",
-      "status": "Paid"
+      "status": "Delivered"
     },
     {
       "id": "a06d",
@@ -296,7 +332,7 @@
         "emiOption": ""
       },
       "date": "16/10/2025, 2:25:43 pm",
-      "status": "Cancelled"
+      "status": "Processing"
     },
     {
       "id": "9a29",
@@ -449,7 +485,258 @@
         "emiOption": ""
       },
       "date": "20/10/2025, 11:57:37 am",
+      "status": "Processing"
+    },
+    {
+      "id": "e68c",
+      "user": "rashadcp000@gmail.com",
+      "items": [
+        {
+          "id": "2",
+          "name": "Energy Drink - Apple",
+          "price": 150,
+          "image": "apple.png",
+          "quantity": 2
+        },
+        {
+          "id": "3",
+          "name": "Energy Drink - Mango",
+          "price": 150,
+          "image": "mango.png",
+          "quantity": 1
+        },
+        {
+          "id": "4",
+          "name": "Energy Drink - Chocolate",
+          "price": 170,
+          "image": "chocolate.png",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 620,
+      "paymentMethod": "Cash on Delivery",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "21/10/2025, 2:48:35 pm",
+      "status": "Cancelled"
+    },
+    {
+      "id": "ee7a",
+      "user": "rashadcp000@gmail.com",
+      "items": [
+        {
+          "id": "3",
+          "name": "Energy Drink - Mango",
+          "price": 150,
+          "image": "mango.png",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 150,
+      "paymentMethod": "Online Payment",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "9562703957@superyes",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "21/10/2025, 2:53:21 pm",
+      "status": "Shipped"
+    },
+    {
+      "id": "c7cf",
+      "user": "rashadcp000@gmail.com",
+      "items": [
+        {
+          "id": "4",
+          "name": "Energy Drink - Chocolate",
+          "price": 170,
+          "image": "chocolate.png",
+          "quantity": 1
+        },
+        {
+          "id": "8",
+          "name": "Energy Drink - Lyche",
+          "price": 150,
+          "image": "lichi.png",
+          "quantity": 1
+        },
+        {
+          "id": "f8af",
+          "name": "Energy drink boost",
+          "price": 200,
+          "image": "https://th.bing.com/th/id/OIP.rfBFRmITXMn_XKSgYfbHYgAAAA?w=172&h=180&c=7&r=0&o=7&cb=12&dpr=1.3&pid=1.7&rm=3",
+          "quantity": 1
+        },
+        {
+          "id": "e7c6",
+          "name": "Energy drink Splash",
+          "price": 400,
+          "image": "http://localhost:5173/specialdynamite.jpg",
+          "quantity": 1
+        },
+        {
+          "id": "c184",
+          "name": "Energy Drink charged",
+          "price": 300,
+          "image": "http://localhost:5173/refuellegend.jpg",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 1220,
+      "paymentMethod": "Cash on Delivery",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "22/10/2025, 10:58:05 am",
+      "status": "Processing"
+    },
+    {
+      "id": "93a8",
+      "user": "shemin@gmail.com",
+      "items": [
+        {
+          "id": "5",
+          "name": "Energy Drink - Coconut",
+          "price": 160,
+          "image": "coconut.png",
+          "quantity": 1
+        },
+        {
+          "id": "1",
+          "name": "Energy Drink - Lemon",
+          "price": 140,
+          "image": "lemon.png",
+          "quantity": 1
+        },
+        {
+          "id": "4",
+          "name": "Energy Drink - Chocolate",
+          "price": 170,
+          "image": "chocolate.png",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 470,
+      "paymentMethod": "EMI",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "24/10/2025, 4:24:56 pm",
+      "status": "Shipped"
+    },
+    {
+      "id": "794f",
+      "user": "test@gmail.com",
+      "items": [
+        {
+          "id": "3",
+          "name": "Energy Drink - Mango",
+          "price": 150,
+          "image": "mango.png",
+          "quantity": 1
+        },
+        {
+          "id": "4",
+          "name": "Energy Drink - Chocolate",
+          "price": 170,
+          "image": "chocolate.png",
+          "quantity": 1
+        },
+        {
+          "id": "2",
+          "name": "Energy Drink - Apple",
+          "price": 150,
+          "image": "apple.png",
+          "category": "Apple",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 470,
+      "paymentMethod": "Online Payment",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "9562703957@superyes",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "10/26/2025, 11:48:50 AM",
       "status": "Paid"
+    },
+    {
+      "id": "80a7",
+      "user": "test1@gmail.com",
+      "items": [
+        {
+          "id": "3",
+          "name": "Energy Drink - Mango",
+          "price": 150,
+          "image": "mango.png",
+          "quantity": 1
+        },
+        {
+          "id": "6",
+          "name": "Energy Drink - Green Apple",
+          "price": 170,
+          "image": "greenapple.png",
+          "quantity": 2
+        },
+        {
+          "id": "2",
+          "name": "Energy Drink - Apple",
+          "price": 150,
+          "image": "apple.png",
+          "category": "Apple",
+          "quantity": 1
+        },
+        {
+          "id": "5",
+          "name": "Energy Drink - Coconut",
+          "price": 160,
+          "image": "coconut.png",
+          "quantity": 1
+        },
+        {
+          "id": "9",
+          " name": "Energy Drink - Mint",
+          "price": 110,
+          "image": "mint.png",
+          "name": "Energy Drink - Mint",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 910,
+      "paymentMethod": "Cash on Delivery",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": "",
+        "upiId": "",
+        "bank": "",
+        "emiOption": ""
+      },
+      "date": "10/26/2025, 11:53:00 AM",
+      "status": "Processing"
     }
   ]
 }

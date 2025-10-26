@@ -6,6 +6,7 @@ function AdminUsers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [searchTerm, setSearchTerm] = useState(''); // 🔍 added state for search
 
   useEffect(() => {
     fetchUsers();
@@ -36,7 +37,6 @@ function AdminUsers() {
     }
   };
 
-  // Toggle block/unblock user
   const handleToggleBlock = async (userId, currentlyBlocked) => {
     try {
       await axios.patch(`http://localhost:5000/users/${userId}`, { blocked: !currentlyBlocked });
@@ -48,11 +48,35 @@ function AdminUsers() {
     }
   };
 
+  // 🔍 Filter users based on search term
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.number.toString().includes(searchTerm)
+  );
+
   if (loading) return <div className="text-center p-4">Loading...</div>;
 
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-6">Manage Users</h2>
+
+      {/* 🔍 Search Bar */}
+      <div className="flex items-center gap-2 mb-4">
+        <input
+          type="text"
+          placeholder="Search by name, email, or phone..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+        <button
+          onClick={() => setSearchTerm('')}
+          className="bg-gray-100 hover:bg-gray-200 text-gray-600 px-3 py-2 rounded-lg"
+        >
+          Clear
+        </button>
+      </div>
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
@@ -61,38 +85,59 @@ function AdminUsers() {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Phone</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {users.map(user => (
-              <tr key={user.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4">{user.name}</td>
-                <td className="px-6 py-4">{user.email}</td>
-                <td className="px-6 py-4">{user.number}</td>
-                <td className="px-6 py-4">{user.blocked ? <span className="text-red-600">Blocked</span> : <span className="text-green-600">Active</span>}</td>
-                <td className="px-6 py-4">
-                  <button
-                    onClick={() => setSelectedUser(selectedUser?.id === user.id ? null : user)}
-                    className="text-blue-600 hover:text-blue-900 mr-3"
-                  >
-                    View Details
-                  </button>
-                  <button
-                    onClick={() => handleToggleBlock(user.id, !!user.blocked)}
-                    className={`mr-3 ${user.blocked ? 'text-green-600 hover:text-green-900' : 'text-yellow-600 hover:text-yellow-900'}`}
-                  >
-                    {user.blocked ? 'Unblock' : 'Block'}
-                  </button>
-                  <button
-                    onClick={() => handleDeleteUser(user.id)}
-                    className="text-red-600 hover:text-red-900"
-                  >
-                    Delete
-                  </button>
+            {filteredUsers.length > 0 ? (
+              filteredUsers.map((user) => (
+                <tr key={user.id} className="hover:bg-gray-50">
+                  <td className="px-6 py-4">{user.name}</td>
+                  <td className="px-6 py-4">{user.email}</td>
+                  <td className="px-6 py-4">{user.number}</td>
+                  <td className="px-6 py-4">
+                    {user.blocked ? (
+                      <span className="text-red-600">Blocked</span>
+                    ) : (
+                      <span className="text-green-600">Active</span>
+                    )}
+                  </td>
+                  <td className="px-6 py-4">
+                    <button
+                      onClick={() =>
+                        setSelectedUser(selectedUser?.id === user.id ? null : user)
+                      }
+                      className="text-blue-600 hover:text-blue-900 mr-3"
+                    >
+                      View Details
+                    </button>
+                    <button
+                      onClick={() => handleToggleBlock(user.id, !!user.blocked)}
+                      className={`mr-3 ${
+                        user.blocked
+                          ? 'text-green-600 hover:text-green-900'
+                          : 'text-yellow-600 hover:text-yellow-900'
+                      }`}
+                    >
+                      {user.blocked ? 'Unblock' : 'Block'}
+                    </button>
+                    <button
+                      onClick={() => handleDeleteUser(user.id)}
+                      className="text-red-600 hover:text-red-900"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="text-center py-6 text-gray-500">
+                  No users found.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
@@ -107,7 +152,7 @@ function AdminUsers() {
                 ✕
               </button>
             </div>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="text-gray-600">Name</label>
@@ -127,12 +172,20 @@ function AdminUsers() {
               </div>
               <div>
                 <label className="text-gray-600">Status</label>
-                <p className="font-medium">{selectedUser.blocked ? 'Blocked' : 'Active'}</p>
+                <p className="font-medium">
+                  {selectedUser.blocked ? 'Blocked' : 'Active'}
+                </p>
               </div>
               <div className="flex gap-2">
                 <button
-                  onClick={() => handleToggleBlock(selectedUser.id, !!selectedUser.blocked)}
-                  className={`px-3 py-1 rounded ${selectedUser.blocked ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}
+                  onClick={() =>
+                    handleToggleBlock(selectedUser.id, !!selectedUser.blocked)
+                  }
+                  className={`px-3 py-1 rounded ${
+                    selectedUser.blocked
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-yellow-100 text-yellow-800'
+                  }`}
                 >
                   {selectedUser.blocked ? 'Unblock User' : 'Block User'}
                 </button>

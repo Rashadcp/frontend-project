@@ -12,20 +12,23 @@ import OrderDetails from "./pages/OrderDetails";
 import Wishlist from "./pages/Wishlist";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import AdminDashboard from "./Admin/AdminDashboard";
 import AdminProducts from "./Admin/AdminProducts";
 import AdminOrders from "./Admin/AdminOrders";
 import AdminUsers from "./Admin/AdminUsers";
 import AdminOverview from "./Admin/AdminOverview";
+
+
 import ProtectedRoute from "./components/ProtectedRoute";
-import AdminLogin from "./Admin/AdminLogin";
-import ProtectedAdminRoute from "./Admin/ProtectedAdminRoute";
 
 // 👇 Sub-component to use useLocation
 function AppContent() {
   const location = useLocation();
+
   // Hide navbar on login, register, and all admin routes
-  const hideNavbar = ["/login", "/register"].includes(location.pathname) || location.pathname.startsWith("/admin");
+  const hideNavbar =
+    ["/login", "/register"].includes(location.pathname) || location.pathname.startsWith("/admin");
 
   return (
     <>
@@ -33,40 +36,20 @@ function AppContent() {
 
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
         {/* Protected User Routes */}
-        <Route path="/cart" element={
-          <ProtectedRoute>
-            <Cart />
-          </ProtectedRoute>
-        } />
-        <Route path="/payment" element={
-          <ProtectedRoute>
-            <Payment />
-          </ProtectedRoute>
-        } />
-        <Route path="/wishlist" element={
-          <ProtectedRoute>
-            <Wishlist />
-          </ProtectedRoute>
-        } />
-        <Route path="/address" element={
-          <ProtectedRoute>
-            <Address />
-          </ProtectedRoute>
-        } />
-        <Route path="/orders" element={
-          <ProtectedRoute>
-            <OrderDetails />
-          </ProtectedRoute>
-        } />
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProtectedRoute><Products /></ProtectedRoute>} />
+        <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+        <Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
+        <Route path="/wishlist" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
+        <Route path="/address" element={<ProtectedRoute><Address /></ProtectedRoute>} />
+        <Route path="/orders" element={<ProtectedRoute><OrderDetails /></ProtectedRoute>} />
 
         {/* Admin Routes */}
-        <Route path="/admin/login" element={<AdminLogin />} />
+        
         <Route
           path="/admin"
           element={
@@ -87,20 +70,20 @@ function AppContent() {
 
 function App() {
   return (
-    
-      <CartProvider>
-        <ToastContainer
-          position="top-right"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          pauseOnHover
-          theme="dark"
-        />
-        <AppContent /> 
-      </CartProvider>
-    
+    <CartProvider>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        theme="dark"
+      />
+      
+        <AppContent />
+      
+    </CartProvider>
   );
 }
 

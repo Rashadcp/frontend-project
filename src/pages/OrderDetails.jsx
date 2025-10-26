@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { CartContext } from "./CartProvider";
+import { formatDate } from "../utils/dateUtils";
 
 function OrderDetails() {
   const { user: contextUser } = useContext(CartContext);
@@ -55,7 +56,7 @@ function OrderDetails() {
     );
 
   return (
-    <div className="min-h-screen bg-black py-16 px-6">
+    <div className="min-h-screen bg-black py-20 px-4">
       <h1 className="text-4xl font-extrabold text-center text-[#8dc53e] mb-10">
         My Orders 🛍️
       </h1>
@@ -75,19 +76,24 @@ function OrderDetails() {
                     Order #{order.id}
                   </h2>
                   <p className="text-gray-400 text-sm">
-                    Placed on {new Date(order.date).toLocaleDateString()}
+                    Placed on {formatDate(order.date)}
                   </p>
                   <p
-                    className={`text-sm font-medium mt-1 ${
-                      order.status === "Delivered"
-                        ? "text-green-400"
-                        : order.status === "Processing"
-                        ? "text-yellow-400"
-                        : "text-gray-300"
-                    }`}
-                  >
-                    Status: {order.status}
-                  </p>
+  className={`text-sm font-medium mt-1 ${
+    order.status === "Delivered"
+      ? "text-green-400"
+      : order.status === "Processing"
+      ? "text-yellow-400"
+      : order.status === "Shipped"
+      ? "text-blue-400"
+      : order.status === "Cancelled"
+      ? "text-red-500"
+      : "text-gray-300"
+  }`}
+>
+  Status: {order.status}
+</p>
+
                 </div>
               </div>
 

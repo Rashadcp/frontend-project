@@ -125,7 +125,7 @@ function Login() {
           <button
             type="submit"
             className="bg-[#8dc53e] text-white py-2 rounded hover:bg-[#76b431] transition"
-            onClick={()=>toast.success("Successfully Logged in")}
+            
           >
             Login
           </button>

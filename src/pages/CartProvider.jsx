@@ -6,16 +6,21 @@ export const CartContext = createContext();
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
-  const [user, setUser] = useState(null);
-
-  // Load user from localStorage on app start
-  useEffect(() => {
-    const savedUser = JSON.parse(localStorage.getItem("user"));
-    if (savedUser) {
-      setUser(savedUser);
-      fetchUserCart(savedUser.email);
+  // Initialize user synchronously from localStorage to avoid a flash redirect
+  const [user, setUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("user")) || null;
+    } catch (e) {
+      return null;
     }
-  }, []);
+  });
+
+  // When user is available (including after refresh), fetch their cart
+  useEffect(() => {
+    if (user && user.email) {
+      fetchUserCart(user.email);
+    }
+  }, [user]);
 
   // Check if user is logged in
   const isLoggedIn = () => {
